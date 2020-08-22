@@ -15,7 +15,9 @@ inputs:
     data:
         description: 'Request Body as JSON String'
         required: false
-        default: '{}'
+    execOutput:
+        description: 'Request Body as stdout from exec'
+        required: false
     username:
         description: 'Auth Username'
         required: false
