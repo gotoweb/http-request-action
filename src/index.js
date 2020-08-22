@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const { request, METHOD_POST } = require('./httpClient');
 const { GithubActions } = require('./githubActions');
+const stdout = require('../src/stdout');
 
 let auth = undefined
 let customHeaders = {}
@@ -8,7 +9,7 @@ let customHeaders = {}
 if (!!core.getInput('customHeaders')) {
   try {
     customHeaders = JSON.parse(core.getInput('customHeaders'));
-  } catch(error) {
+  } catch (error) {
     core.error('Could not parse customHeaders string value')
   }
 }
@@ -36,7 +37,13 @@ const instanceConfig = {
 
 core.debug('Instance Configuration: ' + JSON.stringify(instanceConfig))
 
-const data = core.getInput('data') || '{}';
+let data = '{}'
+if (core.getInput('data')) {
+  data = core.getInput('data')
+}
+else if (core.getInput('execOutput')) {
+  data = stdout(core.getInput('execOutput'))
+}
 const method = core.getInput('method') || METHOD_POST;
 const preventFailureOnNoResponse = core.getInput('preventFailureOnNoResponse') === 'true';
 

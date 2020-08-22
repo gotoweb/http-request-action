@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "private": false,
   "scripts": {
-    "build": "ncc build src/index.js -o dist"
+    "build": "ncc build src/index.js -o dist",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,8 @@
   },
   "homepage": "https://github.com/fjogeleit/http-request-action#readme",
   "devDependencies": {
-    "@actions/core": "^1.2.2"
+    "@actions/core": "^1.2.2",
+    "jest": "^26.4.2"
   },
   "dependencies": {
     "@zeit/ncc": "^0.21.1",
